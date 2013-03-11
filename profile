@@ -34,6 +34,7 @@ alias gp='git pull'
 alias gl='git st'
 alias gc='git commit'
 alias gu='git add -u && gl'
+alias grh='git reset HEAD'
 alias post_last='git diff HEAD^ --full-index | post-review --diff-filename=- -o --guess-summary --guess-description'
 alias postreview='post-review -o --guess-summary --guess-description'
 alias fgrep='grep -HRn'
@@ -60,21 +61,10 @@ function vag() {
 }
 alias rmpyc='find . -name \*.pyc -delete'
 
-# global git configs
-git config --global branch.master.rebase true
-git config --global branch.autosetuprebase always
-git config --global alias.co checkout
-git config --global alias.br branch
-git config --global alias.st status
-git config --global alias.lg "log --graph --pretty=format:'%Cred%h%Creset-%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative"
-
-# source virtualenvwrapper
-source /usr/local/bin/virtualenvwrapper.sh
-
 # export paths for MySQLdb requirements
 export PATH=$HOME/mysql-5.5.12-osx10.6-x86_64/bin:$PATH
 export DYLD_LIBRARY_PATH=$HOME/mysql-5.5.12-osx10.6-x86_64/lib:$DYLD_LIBRARY_PATH
-source $HOME/.gitcompletion
-source $HOME/initaws.sh
 
+source $HOME/.gitcompletion
 source /opt/boxen/env.sh
+source ~/.local/bin/swiftcommandline.sh

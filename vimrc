@@ -21,7 +21,7 @@ set clipboard+=unnamed
 set scrolloff=10
 let mapleader = ","
 syntax on
-filetype plugin on
+filetype plugin indent on
 
 "folding settings
 set foldmethod=indent   "fold based on indent
@@ -196,6 +196,3 @@ map <Leader>o :tabedit %<CR>
 
 "" easy escape with jj
 inoremap jj <ESC>
-
-"" jedi-vim settings
-let g:jedi#popup_on_dot = 0
