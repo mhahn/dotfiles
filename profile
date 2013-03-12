@@ -43,3 +43,6 @@ export LSCOLORS="cxfxcxdxbxegedabagacad"
 
 source $HOME/.gitcompletion
 source ~/.sensitive_aliases
+[ -f /opt/boxen/env.sh ] && source /opt/boxen/env.sh
+source ~/.local/bin/swiftcommandline.sh
+source ~/.eb_aliases

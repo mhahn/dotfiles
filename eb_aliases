@@ -1,0 +1,11 @@
+export EB_DIR=/Volumes/eb_home/work/eventbritecore
+function vg() {
+   if [ $1 ]
+   then
+       pushd $EB_DIR/django/scripts/vagrant/;
+       vagrant $@;
+       popd;
+   else
+       pushd $EB_DIR;
+   fi
+}
