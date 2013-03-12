@@ -25,3 +25,6 @@
     rebase = true
 [branch]
     autosetuprebase = always
+[user]
+	name = Michael Hahn
+	email = mhahn@eventbrite.com

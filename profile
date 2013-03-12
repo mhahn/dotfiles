@@ -35,22 +35,11 @@ alias gl='git st'
 alias gc='git commit'
 alias gu='git add -u && gl'
 alias grh='git reset HEAD'
-alias post_last='git diff HEAD^ --full-index | post-review --diff-filename=- -o --guess-summary --guess-description'
+alias post_last='post-review --revision-range HEAD^ -o --guess-summary --guess-description'
 alias postreview='post-review -o --guess-summary --guess-description'
 alias rgrep='grep -HRn'
 
 export LSCOLORS="cxfxcxdxbxegedabagacad"
-
-function vg() {
-   if [ $1 ]
-   then
-       pushd $EB_HOME/django/scripts/vagrant/;
-       vagrant $@;
-       popd;
-   else
-       pushd $EB_HOME;
-   fi
-}
 
 source $HOME/.gitcompletion
 source ~/.sensitive_aliases
