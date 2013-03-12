@@ -25,14 +25,3 @@
     rebase = true
 [branch]
     autosetuprebase = always
-
-[core]
-    excludesfile = /opt/boxen/config/git/gitignore
-
-[credential]
-
-[hub]
-    protocol = https
-[user]
-    name = Michael Hahn
-    email = mhahn@eventbrite.com
