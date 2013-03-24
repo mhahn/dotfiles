@@ -21,7 +21,7 @@ set clipboard+=unnamed
 set scrolloff=10
 let mapleader = ","
 syntax on
-filetype plugin indent on
+filetype plugin on
 
 "folding settings
 set foldmethod=indent   "fold based on indent
@@ -67,6 +67,9 @@ nnoremap <leader>h :set hlsearch<CR>
 
 " shortcut for hiding buffer
 nnoremap <leader>i :hide<CR>
+
+" shortcut for fugitive Gstatus
+nnoremap <leader>gs :Gstatus<CR>
 
 " The PC is fast enough, do syntax highlight syncing from start
 autocmd BufEnter * :syntax sync fromstart
