@@ -192,8 +192,8 @@ map <C-O> :call Open_New_File()<CR>
 " copy current filename to clipboard
 nnoremap <Leader>f :let @+=expand("%")<CR>
 
-" use ack!
-nnoremap <Leader>a :Ack
+" use ag!
+nnoremap <Leader>a :Ag
 
 " NERDtree on <leader>nt
 nnoremap <Leader>nt :NERDTreeToggle<CR>
