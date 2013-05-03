@@ -84,12 +84,20 @@ noremap <leader>pp "+gP
 
 " python support
 " --------------
-autocmd FileType python setlocal expandtab shiftwidth=4 tabstop=8 colorcolumn=79
+autocmd FileType python setlocal expandtab shiftwidth=4 colorcolumn=79
 \ softtabstop=4 smartindent
 let python_highlight_all=1
 let python_highlight_space_errors=0
 
+" ruby support
+" ------------
+autocmd FileType ruby setlocal expandtab shiftwidth=2 softtabstop=2 smartindent colorcolumn=79
+
 au BufNewFile,BufRead *.mako set ft=mako
+
+" puppet support
+" --------------
+autocmd FileType puppet setlocal expandtab shiftwidth=2 softtabstop=2 smartindent colorcolumn=79
 
 " rst
 " ---
