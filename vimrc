@@ -23,6 +23,10 @@ let mapleader = ","
 syntax on
 filetype plugin on
 
+"split settings
+set splitbelow
+set splitright
+
 "folding settings
 set foldmethod=indent   "fold based on indent
 set foldnestmax=10      "deepest fold is 10 levels
