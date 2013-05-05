@@ -21,7 +21,7 @@ set clipboard+=unnamed
 set scrolloff=10
 let mapleader = ","
 syntax on
-filetype plugin on
+filetype plugin indent on
 
 "split settings
 set splitbelow
@@ -85,7 +85,7 @@ noremap <leader>pp "+gP
 " python support
 " --------------
 autocmd FileType python setlocal expandtab shiftwidth=4 colorcolumn=79
-\ softtabstop=4 smartindent
+\ softtabstop=4 nosmartindent
 let python_highlight_all=1
 let python_highlight_space_errors=0
 
