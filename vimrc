@@ -211,3 +211,7 @@ map <Leader>o :tabedit %<CR>
 
 "" easy escape with jj
 inoremap jj <ESC>
+
+" holy shit, we have a lot of files
+let g:CommandTMaxFiles=50000
+let g:CommandTMaxHeight=25
