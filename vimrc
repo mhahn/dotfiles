@@ -215,3 +215,8 @@ inoremap jj <ESC>
 " holy shit, we have a lot of files
 let g:CommandTMaxFiles=50000
 let g:CommandTMaxHeight=25
+
+" vim-airline support
+set laststatus=2
+let g:airline_theme='simple'
+let g:airline_fugitive_prefix = '⎇ '
