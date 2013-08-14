@@ -220,3 +220,6 @@ let g:CommandTMaxHeight=25
 set laststatus=2
 let g:airline_theme='simple'
 let g:airline_fugitive_prefix = '⎇ '
+
+" toggle autoindenting
+:nnoremap <F8> :setl inde=<CR>
