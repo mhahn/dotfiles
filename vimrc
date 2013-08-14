@@ -107,7 +107,7 @@ autocmd FileType rst setlocal expandtab shiftwidth=2 tabstop=2 softtabstop=2 col
 
 " javascript support
 " ---
-autocmd FileType javascript setlocal expandtab shiftwidth=2 tabstop=2 softtabstop=2 colorcolumn=120
+autocmd FileType javascript setlocal expandtab shiftwidth=4 tabstop=4 softtabstop=4 colorcolumn=120
 
 " json support
 autocmd BufNewFile,BufRead *.json setlocal ft=json
