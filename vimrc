@@ -223,3 +223,7 @@ let g:airline_fugitive_prefix = '⎇ '
 
 " toggle autoindenting
 :nnoremap <F8> :setl inde=<CR>
+
+" exclude certain files from listings
+:set wildignore+=node_modules
+:set wildignore+=bower_components
