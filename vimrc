@@ -91,6 +91,10 @@ autocmd FileType python setlocal expandtab shiftwidth=4 colorcolumn=79
 let python_highlight_all=1
 let python_highlight_space_errors=0
 
+" taskwarrior support
+" --------------------
+autocmd BufNewFile,BufRead *.task highlight ExtraWhitespace ctermbg=0
+
 " ruby support
 " ------------
 autocmd FileType ruby setlocal expandtab shiftwidth=2 softtabstop=2 smartindent colorcolumn=79
