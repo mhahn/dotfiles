@@ -75,7 +75,7 @@ nnoremap <leader>i :hide<CR>
 " shortcut for fugitive Gstatus
 nnoremap <leader>gs :Gstatus<CR>
 " shorcut for fugitive Gblame
-nnoremap <leader>gb :Gblame<CR>
+nnoremap <leader>gb :Gblame -w<CR>
 
 " The PC is fast enough, do syntax highlight syncing from start
 autocmd BufEnter * :syntax sync fromstart
