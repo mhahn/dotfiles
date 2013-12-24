@@ -45,7 +45,19 @@ alias rgrep='grep -HRn'
 export LSCOLORS="cxfxcxdxbxegedabagacad"
 
 source $HOME/.gitcompletion
-source ~/.sensitive_aliases
 [ -f /opt/boxen/env.sh ] && source /opt/boxen/env.sh
 source ~/.local/bin/swiftcommandline.sh
 source ~/.eb_aliases
+
+# task warrior shortcuts
+alias tl='clear && task ls'
+alias ta='task add'
+
+function postpone_task () {
+    echo "postponing task $1 for $2";
+    task $1 modify wait:$2;
+}
+
+function complete_task () {
+    task $1 done;
+}
