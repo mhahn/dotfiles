@@ -236,4 +236,4 @@ let g:airline_fugitive_prefix = '⎇ '
 
 "Flake 8 support
 " ignore flake8 errors I don't agree with
-let g:flake8_ignore="E123,E125,E126"
+let g:flake8_ignore="E123,E125,E126,E127,E128"
