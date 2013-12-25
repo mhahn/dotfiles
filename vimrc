@@ -283,6 +283,7 @@ map <Leader>le :Errors<CR>
 
 " CtrlP support
 let g:ctrlp_clear_cache_on_exit = 0
+let g:ctrlp_max_height = 20
 nnoremap <silent> <Leader>t :CtrlP<cr>
 nnoremap <silent> <leader>T :ClearCtrlPCache<cr>\|:CtrlP<cr>
 
