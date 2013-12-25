@@ -16,6 +16,7 @@ NeoBundle 'https://github.com/scrooloose/nerdtree.git'
 NeoBundle 'https://github.com/rking/ag.vim.git'
 NeoBundle 'https://github.com/mileszs/ack.vim.git'
 NeoBundle 'https://github.com/kien/ctrlp.vim.git'
+NeoBundle 'https://github.com/Shougo/unite.vim.git'
 NeoBundle 'Shougo/vimproc', {
       \ 'build' : {
       \     'mac' : 'make -f make_mac.mak',
@@ -41,6 +42,7 @@ set wildmenu
 set commentstring=\ #\ %s
 set clipboard+=unnamed
 set scrolloff=10
+set noswapfile
 let mapleader = ","
 syntax on
 filetype plugin indent on
@@ -211,9 +213,6 @@ map <C-O> :call Open_New_File()<CR>
 " copy current filename to clipboard
 nnoremap <Leader>f :let @+=expand("%")<CR>
 
-" use ag!
-nnoremap <Leader>a :Ag
-
 " NERDtree on <leader>nt
 nnoremap <Leader>nt :NERDTreeToggle<CR>
 let NERDTreeIgnore=['\~$', '\.pyc$', '\.pyo$', '\.class$', 'pip-log\.txt$', '\.o$']
@@ -248,6 +247,20 @@ let g:ctrlp_custom_ignore = {
   \ 'dir':  'python_venv\|eventbrite_python\|\.fla\|vagrant/modules\|tiny_mce\|python\/img\|python\/static\/images',
   \ }
 
+" Unite support
+let g:unite_source_grep_command = 'ag'
+let g:unite_source_grep_max_candidates = 500000
+let g:unite_source_grep_default_opts = '--ignore node_modules --nocolor --noheading'
+call unite#custom#source('file_rec,file_rec/async', 'max_candidates', 0)
+" use ag!
+map <Leader>a :Unite grep:. -no-split<CR>
+
+autocmd FileType unite call s:unite_my_settings() "{{{
+function! s:unite_my_settings()
+  " Overwrite settings.
+  nmap <buffer> <C-z>     <Plug>(unite_toggle_transpose_window)
+  imap <buffer> <C-z>     <Plug>(unite_toggle_transpose_window)
+endfunction "}}}
 
 " Syntastic support
 " Better :sign interface symbols
