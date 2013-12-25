@@ -1,6 +1,28 @@
-call pathogen#infect()
-call pathogen#runtime_append_all_bundles()
-call pathogen#helptags()
+" Setup neobundle
+if has('vim_starting')
+    set nocompatible
+    set runtimepath+=~/.vim/bundle/neobundle.vim/
+endif
+call neobundle#rc(expand('~/.vim/bundle/'))
+
+" neobundles
+NeoBundle 'git@github.com:tpope/vim-fugitive.git'
+NeoBundle 'git@github.com:mhahn/vim-airline.git'
+NeoBundle 'https://github.com/Lokaltog/vim-easymotion.git'
+NeoBundle 'https://github.com/godlygeek/tabular.git'
+NeoBundle 'https://github.com/scrooloose/syntastic.git'
+NeoBundle 'https://github.com/scrooloose/nerdcommenter.git'
+NeoBundle 'https://github.com/scrooloose/nerdtree.git'
+NeoBundle 'https://github.com/rking/ag.vim.git'
+NeoBundle 'https://github.com/mileszs/ack.vim.git'
+NeoBundle 'https://github.com/kien/ctrlp.vim.git'
+NeoBundle 'Shougo/vimproc', {
+      \ 'build' : {
+      \     'mac' : 'make -f make_mac.mak',
+      \    },
+      \ }
+
+" Personal configs
 set visualbell           " don't beep
 set noerrorbells         " don't beep
 set hlsearch      " highlight search terms
@@ -36,9 +58,6 @@ set foldlevel=1         "this is just what i use
 " Remove whitespace
 nmap <leader>cw :%s/\s\+$//g<CR>
 
-" Enable mouse everywhere
-set mouse=a
-
 " Hide mouse pointer while typing
 set mousehide
 set mousemodel=popup
@@ -53,12 +72,6 @@ nnoremap <leader>v V`]
 
 " switch case of line to Title Case
 nnoremap <Leader>r :s/\<\(\w\)\(\w*\)\>/\u\1\L\2/g<CR>
-
-" Adjust tabwidth for legacy code
-nnoremap <Leader>l :set softtabstop=2 shiftwidth=2<CR>
-
-" Adjust tabwidth for not legacy code
-nnoremap <Leader>nl :set softtabstop=4 shiftwidth=4<CR>
 
 " clear matches
 nnoremap <leader>rm :call clearmatches()<CR>
@@ -218,10 +231,6 @@ map <Leader>o :tabedit %<CR>
 "" easy escape with jj
 inoremap jj <ESC>
 
-" holy shit, we have a lot of files
-let g:CommandTMaxFiles=50000
-let g:CommandTMaxHeight=25
-
 " vim-airline support
 set laststatus=2
 let g:airline_theme='simple'
@@ -231,9 +240,38 @@ let g:airline_fugitive_prefix = '⎇ '
 :nnoremap <F8> :setl inde=<CR>
 
 " exclude certain files from listings
-:set wildignore+=node_modules
-:set wildignore+=bower_components
+:set wildignore+=node_modules,bower_components,*.pyc,*.zip,*.swp
+" exclude specific eb files
+:set wildignore+=python_venv,eventbrite_python,*.fla,*.swf,vagrant/modules,*.png,*.ttf,*.svg,*.jpg,*.gif,*.jpeg
+" Ignore some folders and files for CtrlP indexing
+let g:ctrlp_custom_ignore = {
+  \ 'dir':  'python_venv\|eventbrite_python\|\.fla\|vagrant/modules\|tiny_mce\|python\/img\|python\/static\/images',
+  \ }
 
-"Flake 8 support
-" ignore flake8 errors I don't agree with
-let g:flake8_ignore="E123,E125,E126,E127,E128"
+
+" Syntastic support
+" Better :sign interface symbols
+let g:syntastic_error_symbol = '✗'
+let g:syntastic_warning_symbol = '!'
+" Use Flake8
+let g:syntastic_python_checkers = ['flake8']
+" Ignore Flake8 erros I don't agree with
+let g:syntastic_python_flake8_args = '--ignore="E123,E125,E126,E127,E128"'
+let g:syntastic_enable_highlighting = 0
+hi SignColumn ctermbg=232
+highlight SyntasticErrorSign ctermfg=Red
+highlight SyntasticWarningSign ctermfg=Yellow
+let g:syntastic_mode_map = { 'mode': 'passive',
+                           \ 'active_filetypes': [],
+                           \ 'passive_filetypes': [] }
+
+map <Leader>l :SyntasticToggleMode<CR>
+map <Leader>le :Errors<CR>
+
+" CtrlP support
+let g:ctrlp_clear_cache_on_exit = 0
+nnoremap <silent> <Leader>t :CtrlP<cr>
+nnoremap <silent> <leader>T :ClearCtrlPCache<cr>\|:CtrlP<cr>
+
+" Check neobundle installation
+NeoBundleCheck
