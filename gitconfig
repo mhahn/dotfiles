@@ -3,12 +3,11 @@
     br = branch
     st = status
     lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
+    snapshot = !git stash save "snapshot: $(date)" && git stash apply "stash@{0}"
 [gc]
     auto = 1
 [color]
     diff = auto
-    status = auto
-    branch = auto
     interactive = auto
     ui = true
     pager = true
@@ -28,3 +27,17 @@
 [user]
 	name = Michael Hahn
 	email = mhahn@eventbrite.com
+
+[core]
+excludesfile = /opt/boxen/config/git/gitignore
+	editor = vim
+	trustctime = false
+
+[credential]
+helper = /opt/boxen/bin/boxen-git-credential
+
+[hub]
+protocol = https
+
+[reviewboard]
+	url = http://reviews.evbhome.com/

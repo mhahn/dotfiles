@@ -17,6 +17,16 @@ NeoBundle 'https://github.com/rking/ag.vim.git'
 NeoBundle 'https://github.com/mileszs/ack.vim.git'
 NeoBundle 'https://github.com/kien/ctrlp.vim.git'
 NeoBundle 'https://github.com/Shougo/unite.vim.git'
+NeoBundle 'https://github.com/puppetlabs/puppet-syntax-vim.git'
+NeoBundle 'https://github.com/tpope/vim-surround.git'
+NeoBundle 'git@github.com:saltstack/salt-vim.git'
+NeoBundle 'git@github.com:pangloss/vim-javascript.git'
+NeoBundle 'git@github.com:briancollins/vim-jst.git'
+NeoBundle 'git@github.com:kchmck/vim-coffee-script.git'
+NeoBundle 'git@github.com:digitaltoad/vim-jade.git'
+NeoBundle 'https://github.com/mustache/vim-mustache-handlebars.git'
+
+" async support
 NeoBundle 'Shougo/vimproc', {
       \ 'build' : {
       \     'mac' : 'make -f make_mac.mak',
@@ -43,6 +53,7 @@ set commentstring=\ #\ %s
 set clipboard+=unnamed
 set scrolloff=10
 set noswapfile
+set nu
 let mapleader = ","
 syntax on
 filetype plugin indent on
@@ -114,8 +125,6 @@ autocmd BufNewFile,BufRead *.task highlight ExtraWhitespace ctermbg=0
 " ------------
 autocmd FileType ruby setlocal expandtab shiftwidth=2 softtabstop=2 smartindent colorcolumn=79
 
-au BufNewFile,BufRead *.mako set ft=mako
-
 " puppet support
 " --------------
 autocmd FileType puppet setlocal expandtab shiftwidth=2 softtabstop=2 smartindent colorcolumn=79
@@ -160,7 +169,7 @@ fun! SelectHTML()
       return
     endif
     " check for mako
-    if getline(n) =~ '\(<%\(def\|inherit\)\|% if\)'
+    if getline(n) =~ '\(<%\(def\|inherit\|block\|doc\)\|% if\)'
       set ft=mako
       return
     endif
@@ -177,7 +186,6 @@ endfun
 
 autocmd FileType html,xhtml,xml,htmldjango,htmljinja,eruby,mako setlocal expandtab shiftwidth=4 tabstop=4 softtabstop=4
 autocmd BufNewFile,BufRead *.rhtml setlocal ft=eruby
-autocmd BufNewFile,BufRead *.mako setlocal ft=mako
 autocmd BufNewFile,BufRead *.tmpl setlocal ft=htmljinja
 autocmd BufNewFile,BufRead *.py_tmpl setlocal ft=python
 autocmd BufNewFile,BufRead *.html,*.htm  call SelectHTML()
@@ -190,6 +198,7 @@ let &t_EI = "\<Esc>]50;CursorShape=0\x7"
 colorscheme oldfashioned
 highlight Comment ctermfg=33
 highlight ColorColumn ctermbg=17
+highlight LineNr ctermfg=18
 
 " whitespace matching
 highlight ExtraWhitespace ctermbg=1
@@ -239,28 +248,44 @@ let g:airline_fugitive_prefix = '⎇ '
 :nnoremap <F8> :setl inde=<CR>
 
 " exclude certain files from listings
-:set wildignore+=node_modules,bower_components,*.pyc,*.zip,*.swp
+:set wildignore+=node_modules,bower_components,*.pyc,*.zip,*.swp,dist
 " exclude specific eb files
 :set wildignore+=python_venv,eventbrite_python,*.fla,*.swf,vagrant/modules,*.png,*.ttf,*.svg,*.jpg,*.gif,*.jpeg
 " Ignore some folders and files for CtrlP indexing
 let g:ctrlp_custom_ignore = {
   \ 'dir':  'python_venv\|eventbrite_python\|\.fla\|vagrant/modules\|tiny_mce\|python\/img\|python\/static\/images',
   \ }
+let g:ctrlp_working_path_mode = 'rc'
 
 " Unite support
+let g:unite_force_overwrite_statusline = 0
 let g:unite_source_grep_command = 'ag'
 let g:unite_source_grep_max_candidates = 500000
 let g:unite_source_grep_default_opts = '--ignore node_modules --nocolor --noheading'
+let g:unite_split_rule = "botright"
 call unite#custom#source('file_rec,file_rec/async', 'max_candidates', 0)
 " use ag!
-map <Leader>a :Unite grep:. -no-split<CR>
+map <Leader>a :Unite grep:. -no-quit<CR>
+call unite#filters#matcher_default#use(['matcher_fuzzy'])
+call unite#filters#sorter_default#use(['sorter_rank'])
+
+nnoremap <C-P> :<C-u>Unite  -buffer-name=files   -start-insert buffer file_rec/async:!<cr>
 
 autocmd FileType unite call s:unite_my_settings() "{{{
 function! s:unite_my_settings()
   " Overwrite settings.
+  let b:SuperTabDisabled=1
   nmap <buffer> <C-z>     <Plug>(unite_toggle_transpose_window)
   imap <buffer> <C-z>     <Plug>(unite_toggle_transpose_window)
+  imap <buffer> <C-j>   <Plug>(unite_select_next_line)
+  imap <buffer> <C-k>   <Plug>(unite_select_previous_line)
+  imap <silent><buffer><expr> <C-x> unite#do_action('split')
+  imap <silent><buffer><expr> <C-v> unite#do_action('vsplit')
+  imap <silent><buffer><expr> <C-t> unite#do_action('tabopen')
+
+  nmap <buffer> <ESC> <Plug>(unite_exit)
 endfunction "}}}
+
 
 " Syntastic support
 " Better :sign interface symbols
@@ -271,21 +296,30 @@ let g:syntastic_python_checkers = ['flake8']
 " Ignore Flake8 erros I don't agree with
 let g:syntastic_python_flake8_args = '--ignore="E123,E125,E126,E127,E128"'
 let g:syntastic_enable_highlighting = 0
+let g:syntastic_check_on_open = 1
 hi SignColumn ctermbg=232
 highlight SyntasticErrorSign ctermfg=Red
 highlight SyntasticWarningSign ctermfg=Yellow
-let g:syntastic_mode_map = { 'mode': 'passive',
-                           \ 'active_filetypes': [],
-                           \ 'passive_filetypes': [] }
+let g:syntastic_mode_map = { 'mode': 'active',
+                           \ 'active_filetypes': ['python', 'ruby'],
+                           \ 'passive_filetypes': ['puppet'] }
 
 map <Leader>l :SyntasticToggleMode<CR>
 map <Leader>le :Errors<CR>
+map <Leader>sc :%s/^.*\/\*/\/\*/<CR>
+
+augroup mine
+    au BufWinEnter * sign define mysign
+    au BufWinEnter * exe "sign place 1337 line=1 name=mysign buffer=" . bufnr('%')
+augroup END
 
 " CtrlP support
 let g:ctrlp_clear_cache_on_exit = 0
 let g:ctrlp_max_height = 20
 nnoremap <silent> <Leader>t :CtrlP<cr>
 nnoremap <silent> <leader>T :ClearCtrlPCache<cr>\|:CtrlP<cr>
+
+cmap w!! %!sudo tee > /dev/null %
 
 " Check neobundle installation
 NeoBundleCheck

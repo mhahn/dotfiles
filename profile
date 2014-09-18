@@ -48,6 +48,10 @@ source $HOME/.gitcompletion
 [ -f /opt/boxen/env.sh ] && source /opt/boxen/env.sh
 source ~/.local/bin/swiftcommandline.sh
 source ~/.eb_aliases
+source /usr/local/bin/virtualenvwrapper.sh
+source ~/.pasttlerc
+source ~/.objectively_aliases
+source ~/.jarvis_aliases
 
 # task warrior shortcuts
 alias tl='clear && task ls'
@@ -61,3 +65,9 @@ function postpone_task () {
 function complete_task () {
     task $1 done;
 }
+
+function open_task () {
+    open "`task $1 ls | grep -Eo 'https://[^ ]+'`";
+}
+
+alias betty="~/betty/main.rb"

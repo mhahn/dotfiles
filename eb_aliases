@@ -1,12 +1,53 @@
 export EB_DIR=/Volumes/eb_home/work/eventbritecore
+export NPM_DIR=$EB_DIR/django/media/django
+export EB_VM_MEMSIZE=2560
 alias vgs='vg ssh'
 function vg() {
    if [ $1 ]
    then
-       pushd $EB_DIR/django/scripts/vagrant/;
+       pushd $EB_DIR/django/scripts/vagrant;
        vagrant $@;
        popd;
    else
        pushd $EB_DIR;
    fi
+}
+
+function ebgrunt() {
+    pushd $NPM_DIR
+    /usr/bin/env npm install
+    /usr/bin/env grunt $@
+    popd
+}
+
+PROPOSED_PREFIX="proposed-`whoami`"
+
+function get_current_branch() {
+    echo "`git rev-parse --abbrev-ref HEAD`";
+}
+
+function get_proposed_branch() {
+    echo "$PROPOSED_PREFIX-`get_current_branch`-$1";
+}
+
+function create_proposal() {
+    git branch -m "`get_proposed_branch $1`";
+}
+
+function push_proposal() {
+    git push origin "`get_current_branch`" "$@";
+}
+
+function propose_new_branch() {
+    REFERENCE=$1;
+    shift 1;
+    create_proposal $REFERENCE;
+    push_proposal $@;
+}
+
+function propose() {
+    REFERENCE=$1;
+    PROPOSED="`get_proposed_branch $REFERENCE`"
+    shift 1;
+    git push origin HEAD:"$PROPOSED" "$@";
 }
