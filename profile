@@ -49,9 +49,6 @@ source $HOME/.gitcompletion
 source ~/.local/bin/swiftcommandline.sh
 source ~/.eb_aliases
 source /usr/local/bin/virtualenvwrapper.sh
-source ~/.pasttlerc
-source ~/.objectively_aliases
-source ~/.jarvis_aliases
 
 # task warrior shortcuts
 alias tl='clear && task ls'
