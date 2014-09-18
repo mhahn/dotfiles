@@ -291,6 +291,7 @@ endfunction "}}}
 " Better :sign interface symbols
 let g:syntastic_error_symbol = '✗'
 let g:syntastic_warning_symbol = '!'
+let g:syntastic_style_error_symbol = '-'
 " Use Flake8
 let g:syntastic_python_checkers = ['flake8']
 " Ignore Flake8 erros I don't agree with
