@@ -305,7 +305,7 @@ highlight SyntasticErrorSign ctermfg=Red
 highlight SyntasticWarningSign ctermfg=Yellow
 let g:syntastic_mode_map = { 'mode': 'active',
                            \ 'active_filetypes': ['python', 'ruby'],
-                           \ 'passive_filetypes': ['puppet'] }
+                           \ 'passive_filetypes': ['puppet', 'coffee'] }
 
 map <Leader>l :SyntasticToggleMode<CR>
 map <Leader>le :Errors<CR>
