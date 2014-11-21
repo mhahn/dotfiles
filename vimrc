@@ -26,6 +26,7 @@ NeoBundle 'git@github.com:kchmck/vim-coffee-script.git'
 NeoBundle 'git@github.com:digitaltoad/vim-jade.git'
 NeoBundle 'https://github.com/mustache/vim-mustache-handlebars.git'
 NeoBundle 'git@github.com:mtscout6/vim-cjsx.git'
+NeoBundle 'https://github.com/fatih/vim-go.git'
 
 " async support
 NeoBundle 'Shougo/vimproc', {
