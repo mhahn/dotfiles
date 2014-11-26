@@ -1,0 +1,4 @@
+NSGlobalDomain:
+    KeyRepeat: -int 0
+com.apple.finder:
+    CreateDesktop: -int 0

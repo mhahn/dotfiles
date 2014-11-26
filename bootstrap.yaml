@@ -1,0 +1,35 @@
+after-scripts:
+- ./scripts/setup/vim.sh
+- ./scripts/setup/swiftcommandline.sh
+- brew linkapps
+- brew cask alfred link
+casks:
+- alfred
+- google-chrome
+- iterm2
+- slack
+- spotify
+- sketch
+formulas:
+- bash
+- brew-cask
+- coreutils
+- git
+- gnutls
+- go
+- libxml2
+- macvim --overwrite-system-vi
+- node
+- python
+- python3
+- tig
+icons:
+    iTerm: https://dribbble.com/shots/1702947-iTerm-Replacement-Icon/attachments/271548
+    MacVim: https://github.com/jasonlong/macvim/blob/024f6d4395c3e2f873e020cdddd7f3d22d05166a/src/MacVim/icons/MacVim.icns?raw=true
+symlinks:
+    git/.*: '~'
+    !!python/unicode 'preferences/*': !!python/unicode '~/Library/Preferences/'
+    sh/.*: '~'
+    vim/.*: '~'
+taps:
+- caskroom/cask

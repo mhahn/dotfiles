@@ -19,7 +19,7 @@ function proml {
   esac
 
 PS1="${TITLEBAR}\
-$WHITE[$LIGHT_BLUE\u@\h:\W$PURPLE\$(parse_git_branch)$WHITE]\
+$WHITE[$LIGHT_BLUE\u:\W$PURPLE\$(parse_git_branch)$WHITE]\
 $WHITE\$ "
 }
 proml
@@ -45,9 +45,7 @@ alias rgrep='grep -HRn'
 export LSCOLORS="cxfxcxdxbxegedabagacad"
 
 source $HOME/.gitcompletion
-[ -f /opt/boxen/env.sh ] && source /opt/boxen/env.sh
 source ~/.local/bin/swiftcommandline.sh
-source ~/.eb_aliases
 source /usr/local/bin/virtualenvwrapper.sh
 
 # task warrior shortcuts
@@ -66,5 +64,3 @@ function complete_task () {
 function open_task () {
     open "`task $1 ls | grep -Eo 'https://[^ ]+'`";
 }
-
-alias betty="~/betty/main.rb"

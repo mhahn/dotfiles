@@ -1,39 +1,48 @@
 " Setup neobundle
 if has('vim_starting')
-    set nocompatible
-    set runtimepath+=~/.vim/bundle/neobundle.vim/
+  set nocompatible
+  set runtimepath+=/Users/mhahn/.vim/bundle/neobundle.vim/
 endif
-call neobundle#rc(expand('~/.vim/bundle/'))
 
-" neobundles
-NeoBundle 'git@github.com:tpope/vim-fugitive.git'
-NeoBundle 'git@github.com:mhahn/vim-airline.git'
-NeoBundle 'https://github.com/Lokaltog/vim-easymotion.git'
-NeoBundle 'https://github.com/godlygeek/tabular.git'
-NeoBundle 'https://github.com/scrooloose/syntastic.git'
-NeoBundle 'https://github.com/scrooloose/nerdcommenter.git'
-NeoBundle 'https://github.com/scrooloose/nerdtree.git'
-NeoBundle 'https://github.com/rking/ag.vim.git'
-NeoBundle 'https://github.com/mileszs/ack.vim.git'
-NeoBundle 'https://github.com/kien/ctrlp.vim.git'
-NeoBundle 'https://github.com/Shougo/unite.vim.git'
-NeoBundle 'https://github.com/puppetlabs/puppet-syntax-vim.git'
-NeoBundle 'https://github.com/tpope/vim-surround.git'
-NeoBundle 'git@github.com:saltstack/salt-vim.git'
-NeoBundle 'git@github.com:pangloss/vim-javascript.git'
-NeoBundle 'git@github.com:briancollins/vim-jst.git'
-NeoBundle 'git@github.com:kchmck/vim-coffee-script.git'
-NeoBundle 'git@github.com:digitaltoad/vim-jade.git'
-NeoBundle 'https://github.com/mustache/vim-mustache-handlebars.git'
-NeoBundle 'git@github.com:mtscout6/vim-cjsx.git'
-NeoBundle 'https://github.com/fatih/vim-go.git'
+call neobundle#begin(expand('/Users/mhahn/.vim/bundle'))
+    " Let NeoBundle manage NeoBundle
+    NeoBundleFetch 'Shougo/neobundle.vim'
 
-" async support
-NeoBundle 'Shougo/vimproc', {
-      \ 'build' : {
-      \     'mac' : 'make -f make_mac.mak',
-      \    },
-      \ }
+    " neobundles:
+    NeoBundle 'git@github.com:tpope/vim-fugitive.git'
+    NeoBundle 'git@github.com:mhahn/vim-airline.git'
+    NeoBundle 'https://github.com/Lokaltog/vim-easymotion.git'
+    NeoBundle 'https://github.com/godlygeek/tabular.git'
+    NeoBundle 'https://github.com/scrooloose/syntastic.git'
+    NeoBundle 'https://github.com/scrooloose/nerdcommenter.git'
+    NeoBundle 'https://github.com/scrooloose/nerdtree.git'
+    NeoBundle 'https://github.com/rking/ag.vim.git'
+    NeoBundle 'https://github.com/mileszs/ack.vim.git'
+    NeoBundle 'https://github.com/kien/ctrlp.vim.git'
+    NeoBundle 'https://github.com/Shougo/unite.vim.git'
+    NeoBundle 'https://github.com/puppetlabs/puppet-syntax-vim.git'
+    NeoBundle 'https://github.com/tpope/vim-surround.git'
+    NeoBundle 'git@github.com:saltstack/salt-vim.git'
+    NeoBundle 'git@github.com:pangloss/vim-javascript.git'
+    NeoBundle 'git@github.com:briancollins/vim-jst.git'
+    NeoBundle 'git@github.com:kchmck/vim-coffee-script.git'
+    NeoBundle 'git@github.com:digitaltoad/vim-jade.git'
+    NeoBundle 'https://github.com/mustache/vim-mustache-handlebars.git'
+    NeoBundle 'git@github.com:mtscout6/vim-cjsx.git'
+    NeoBundle 'https://github.com/fatih/vim-go.git'
+
+    " You can specify revision/branch/tag.
+    NeoBundle 'Shougo/vimshell', { 'rev' : '3787e5' }
+    " async support
+    NeoBundle 'Shougo/vimproc', {
+          \ 'build' : {
+          \     'mac' : 'make -f make_mac.mak',
+          \    },
+          \ }
+
+call neobundle#end()
+filetype plugin indent on
+NeoBundleCheck
 
 " Personal configs
 set visualbell           " don't beep
