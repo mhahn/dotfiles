@@ -12,6 +12,7 @@ casks:
 - slack
 - spotify
 formulas:
+- !!python/unicode 'ag'
 - bash
 - brew-cask
 - coreutils
