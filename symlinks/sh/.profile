@@ -64,3 +64,6 @@ function complete_task () {
 function open_task () {
     open "`task $1 ls | grep -Eo 'https://[^ ]+'`";
 }
+
+# fucking xcode
+alias xcode_clean='rm -rf ~/Library/Developer/Xcode/DerivedData'
