@@ -19,6 +19,7 @@ formulas:
 - git
 - gnutls
 - go
+- !!python/unicode 'htop'
 - libxml2
 - macvim --overwrite-system-vi
 - node
