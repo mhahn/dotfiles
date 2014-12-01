@@ -6,6 +6,7 @@ after-scripts:
 casks:
 - alfred
 - !!python/unicode 'dropbox'
+- !!python/unicode 'evernote'
 - google-chrome
 - iterm2
 - sketch
