@@ -123,7 +123,7 @@ noremap <leader>pp "+gP
 
 " python support
 " --------------
-autocmd FileType python setlocal expandtab shiftwidth=4 colorcolumn=79
+autocmd FileType python setlocal expandtab shiftwidth=4 colorcolumn=99
 \ softtabstop=4 nosmartindent
 let python_highlight_all=1
 let python_highlight_space_errors=0
@@ -134,16 +134,16 @@ autocmd BufNewFile,BufRead *.task highlight ExtraWhitespace ctermbg=0
 
 " ruby support
 " ------------
-autocmd FileType ruby setlocal expandtab shiftwidth=2 softtabstop=2 smartindent colorcolumn=79
+autocmd FileType ruby setlocal expandtab shiftwidth=2 softtabstop=2 smartindent colorcolumn=99
 
 " puppet support
 " --------------
-autocmd FileType puppet setlocal expandtab shiftwidth=2 softtabstop=2 smartindent colorcolumn=79
+autocmd FileType puppet setlocal expandtab shiftwidth=2 softtabstop=2 smartindent colorcolumn=99
 
 " rst
 " ---
 autocmd BufNewFile,BufRead *.rst setlocal ft=rst
-autocmd FileType rst setlocal expandtab shiftwidth=2 tabstop=2 softtabstop=2 colorcolumn=79
+autocmd FileType rst setlocal expandtab shiftwidth=2 tabstop=2 softtabstop=2 colorcolumn=99
 \ formatoptions+=nqt textwidth=74
 
 " javascript support
@@ -308,6 +308,7 @@ let g:syntastic_style_warning_symbol = '-'
 let g:syntastic_python_checkers = ['flake8']
 " Ignore Flake8 erros I don't agree with
 let g:syntastic_python_flake8_args = '--ignore="E123,E125,E126,E127,E128"'
+let g:syntastic_python_flake8_args = "--max-line-length=100"
 let g:syntastic_enable_highlighting = 0
 let g:syntastic_check_on_open = 1
 hi SignColumn ctermbg=232
