@@ -18,7 +18,10 @@ vim-go
 vim-jade
 vim-javascript
 vim-jst
+vim-jsx
 vim-mustache-handlebars
+vim-protobuf
 vim-surround
+vim-yaml
 vimproc
 vimshell
