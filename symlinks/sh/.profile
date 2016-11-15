@@ -24,6 +24,7 @@ $WHITE\$ "
 }
 proml
 
+eval "$(direnv hook bash)"
 alias rmpyc='find . -name \*.pyc -delete'
 alias ls="ls -GF"
 alias v='mvim -v'
@@ -67,3 +68,43 @@ function open_task () {
 
 # fucking xcode
 alias xcode_clean='rm -rf ~/Library/Developer/Xcode/DerivedData'
+
+# go workspace
+export GOPATH=$HOME/gocode
+export PATH=$HOME/gocode/bin:/usr/local/opt/go/libexec/bin:$PATH
+export GO15VENDOREXPERIMENT=1
+
+# terraform
+export PATH=$HOME/terraform:$PATH
+export PATH=$HOME/packer:$PATH
+
+# alias hub
+alias git=hub
+
+# deis alais
+export DEISCTL_TUNNEL=54.86.54.221
+
+alias deistunnel='ssh core@$DEISCTL_TUNNEL'
+
+export NVM_DIR="/Users/mhahn/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
+
+alias fuck='$(thefuck $(fc -ln -1))'
+
+alias emptunnel='ssh -A ec2-user@52.2.242.211'
+export EMPIRE_API_URL=https://empire.dev.lunohq.com
+alias stagingemp='EMPIRE_API_URL=https://empire.staging.lunohq.com emp'
+alias oldprodemp='EMPIRE_API_URL=https://empire.lunohq.com emp'
+alias prodemp='EMPIRE_API_URL=https://empire.bot.lunohq.com emp'
+
+alias pglog='tail -f /usr/local/var/postgres/pg_log/*'
+export VAULT_ADDR='https://vault.lunohq.com'
+alias genpass='apg -n 1 -m 20'
+alias cleardns='sudo killall -HUP mDNSResponder'
+alias dc='docker-compose'
+alias jump='ssh -A ubuntu@52.33.0.221'
+alias jumpprod='ssh -A ubuntu@54.152.180.3'
+alias sd='eval $(docker-machine env default)'
+eval "$(rbenv init -)"
+export DRONE_SERVER=http://drone.bot.lunohq.com
+export DRONE_TOKEN=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0ZXh0IjoibWhhaG4iLCJ0eXBlIjoidXNlciJ9.37LbsG8oCI5wS0QlFJm0U8Ftu9wakUL0LhQJ_HLsnV4

@@ -26,18 +26,6 @@
     autosetuprebase = always
 [user]
 	name = Michael Hahn
-	email = mhahn@eventbrite.com
-
+	email = mwhahn@gmail.com
 [core]
-excludesfile = /opt/boxen/config/git/gitignore
-	editor = vim
-	trustctime = false
-
-[credential]
-helper = /opt/boxen/bin/boxen-git-credential
-
-[hub]
-protocol = https
-
-[reviewboard]
-	url = http://reviews.evbhome.com/
+	editor = /usr/bin/vim

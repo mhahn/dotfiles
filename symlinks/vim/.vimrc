@@ -20,16 +20,14 @@ call neobundle#begin(expand('/Users/mhahn/.vim/bundle'))
     NeoBundle 'https://github.com/mileszs/ack.vim.git'
     NeoBundle 'https://github.com/kien/ctrlp.vim.git'
     NeoBundle 'https://github.com/Shougo/unite.vim.git'
-    NeoBundle 'https://github.com/puppetlabs/puppet-syntax-vim.git'
     NeoBundle 'https://github.com/tpope/vim-surround.git'
-    NeoBundle 'git@github.com:saltstack/salt-vim.git'
-    NeoBundle 'git@github.com:pangloss/vim-javascript.git'
-    NeoBundle 'git@github.com:briancollins/vim-jst.git'
-    NeoBundle 'git@github.com:kchmck/vim-coffee-script.git'
-    NeoBundle 'git@github.com:digitaltoad/vim-jade.git'
-    NeoBundle 'https://github.com/mustache/vim-mustache-handlebars.git'
-    NeoBundle 'git@github.com:mtscout6/vim-cjsx.git'
     NeoBundle 'https://github.com/fatih/vim-go.git'
+    NeoBundle 'git@github.com:uarun/vim-protobuf.git'
+    NeoBundle 'https://github.com/avakhov/vim-yaml.git'
+    NeoBundle 'https://github.com/ekalinin/Dockerfile.vim.git'
+    NeoBundle 'https://github.com/othree/yajs.vim.git'
+    NeoBundle 'https://github.com/gavocanov/vim-js-indent.git'
+    NeoBundle 'https://github.com/othree/es.next.syntax.vim.git'
 
     " You can specify revision/branch/tag.
     NeoBundle 'Shougo/vimshell', { 'rev' : '3787e5' }
@@ -67,7 +65,6 @@ set noswapfile
 set nu
 let mapleader = ","
 syntax on
-filetype plugin indent on
 
 "split settings
 set splitbelow
@@ -121,10 +118,15 @@ autocmd BufEnter * :syntax sync fromstart
 noremap <leader>yy "+y
 noremap <leader>pp "+gP
 
+" html support
+" ------------
+autocmd FileType html setlocal expandtab shiftwidth=4 tabstop=4 softtabstop=4 colorcolumn=120 smartindent
+:let g:html_indent_inctags = "html,body,head,tbody"
+
 " python support
 " --------------
-autocmd FileType python setlocal expandtab shiftwidth=4 colorcolumn=99
-\ softtabstop=4 nosmartindent
+autocmd FileType python setlocal expandtab shiftwidth=4 colorcolumn=80
+\ softtabstop=4
 let python_highlight_all=1
 let python_highlight_space_errors=0
 
@@ -148,7 +150,8 @@ autocmd FileType rst setlocal expandtab shiftwidth=2 tabstop=2 softtabstop=2 col
 
 " javascript support
 " ---
-autocmd FileType javascript setlocal expandtab shiftwidth=4 tabstop=4 softtabstop=4 colorcolumn=120
+autocmd FileType javascript setlocal expandtab shiftwidth=2 tabstop=2 softtabstop=2 colorcolumn=120
+let g:jsx_ext_required = 0 " Allow JSX in normal JS files
 
 " json support
 autocmd BufNewFile,BufRead *.json setlocal ft=json
@@ -165,44 +168,6 @@ map <leader>sn ]s
 map <leader>sp [s
 map <leader>sa zg
 map <leader>s? z=
-
-
-" template language support (SGML / XML too)
-" ------------------------------------------
-" and disable taht stupid html rendering (like making stuff bold etc)
-
-fun! SelectHTML()
-  let n = 1
-  while n < 50 && n < line("$")
-    " check for jinja
-    if getline(n) =~ '{%\s*\(extends\|block\|macro\|set\|if\|for\|include\|trans\)\>'
-      set ft=htmljinja
-      return
-    endif
-    " check for mako
-    if getline(n) =~ '\(<%\(def\|inherit\|block\|doc\)\|% if\)'
-      set ft=mako
-      return
-    endif
-    " check for genshi
-    if getline(n) =~ 'xmlns:py\|py:\(match\|for\|if\|def\|strip\|xmlns\)'
-      set ft=genshi
-      return
-    endif
-    let n = n + 1
-  endwhile
-  " go with html
-  set ft=html
-endfun
-
-autocmd FileType html,xhtml,xml,htmldjango,htmljinja,eruby,mako setlocal expandtab shiftwidth=4 tabstop=4 softtabstop=4
-autocmd BufNewFile,BufRead *.rhtml setlocal ft=eruby
-autocmd BufNewFile,BufRead *.tmpl setlocal ft=htmljinja
-autocmd BufNewFile,BufRead *.py_tmpl setlocal ft=python
-autocmd BufNewFile,BufRead *.html,*.htm  call SelectHTML()
-let html_no_rendering=1
-let &t_SI = "\<Esc>]50;CursorShape=1\x7"
-let &t_EI = "\<Esc>]50;CursorShape=0\x7"
 
 " theme related rules
 
@@ -306,6 +271,7 @@ let g:syntastic_style_error_symbol = '-'
 let g:syntastic_style_warning_symbol = '-'
 " Use Flake8
 let g:syntastic_python_checkers = ['flake8']
+let g:syntastic_javascript_checkers = ['eslint']
 " Ignore Flake8 erros I don't agree with
 let g:syntastic_python_flake8_args = '--ignore="E123,E125,E126,E127,E128"'
 let g:syntastic_python_flake8_args = "--max-line-length=100"
@@ -316,11 +282,16 @@ highlight SyntasticErrorSign ctermfg=Red
 highlight SyntasticWarningSign ctermfg=Yellow
 let g:syntastic_mode_map = { 'mode': 'active',
                            \ 'active_filetypes': ['python', 'ruby'],
-                           \ 'passive_filetypes': ['puppet', 'coffee'] }
+                           \ 'passive_filetypes': ['puppet', 'coffee', 'java', 'scss'] }
+" avoid go hanging on save
+let g:syntastic_go_checkers = []
 
 map <Leader>l :SyntasticToggleMode<CR>
 map <Leader>le :Errors<CR>
 map <Leader>sc :%s/^.*\/\*/\/\*/<CR>
+
+" Legacy javascript support
+map <Leader>ljs :set expandtab shiftwidth=2 tabstop=2 softtabstop=2 colorcolumn=120<CR>
 
 augroup mine
     au BufWinEnter * sign define mysign

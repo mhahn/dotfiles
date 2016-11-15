@@ -12,6 +12,7 @@ casks:
 - sketch
 - slack
 - spotify
+- inkscape
 formulas:
 - !!python/unicode 'ag'
 - bash
@@ -20,7 +21,10 @@ formulas:
 - git
 - gnutls
 - go
+- !!python/unicode 'heroku'
+- !!python/unicode 'hg'
 - !!python/unicode 'htop'
+- !!python/unicode 'hub'
 - libxml2
 - macvim --overwrite-system-vi
 - node
